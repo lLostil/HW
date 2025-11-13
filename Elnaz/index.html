@@ -7,67 +7,80 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<header class="site-header">
-    <div class="brand">Mini Shop</div>
-    <div class="search-cart">
-        <input id="search" type="search" placeholder="Produkt suchen..." />
-        <button id="cart-btn" class="cart-btn">Warenkorb (<span id="cart-count">0</span>)</button>
-    </div>
-</header>
+    <div class="app-shell">
+        <aside class="sidebar">
+            <div class="sidebar__brand">Mini Shop</div>
+            <nav class="sidebar__nav">
+                <a href="#" class="sidebar__link sidebar__link--active">Home</a>
+                <a href="#" class="sidebar__link">Profile</a>
+                <a href="#" class="sidebar__link">My Orders</a>
+                <a href="#" class="sidebar__link">Search</a>
+            </nav>
+        </aside>
 
-<main class="container">
-    <aside class="filters">
-        <h3>Filter</h3>
-        <label>
-            Kategorie
-            <select id="category-filter">
-                <option value="all">Alle</option>
-            </select>
-        </label>
-        <label>
-            Preis bis
-            <input id="price-filter" type="range" min="0" max="200" value="200" />
-            <span id="price-value">200€</span>
-        </label>
-        <button id="clear-filters">Zurücksetzen</button>
-    </aside>
+        <div class="main-area">
+            <header class="site-header">
+                <div class="search-cart">
+                    <input id="search" type="search" placeholder="Produkt suchen..." />
+                    <button id="cart-btn" class="cart-btn">Warenkorb (<span id="cart-count">0</span>)</button>
+                </div>
+            </header>
 
-    <section class="products">
-        <div id="products-grid" class="grid"></div>
-    </section>
-</main>
+            <main class="content">
+                <section class="filters">
+                    <h3>Filter</h3>
+                    <label>
+                        Kategorie
+                        <select id="category-filter">
+                            <option value="all">Alle</option>
+                        </select>
+                    </label>
+                    <label>
+                        Preis bis
+                        <input id="price-filter" type="range" min="0" max="200" value="200" />
+                        <span id="price-value">200€</span>
+                    </label>
+                    <button id="clear-filters">Zurücksetzen</button>
+                </section>
 
-<!-- Warenkorb Modal -->
-<div id="cart-modal" class="modal hidden">
-    <div class="modal-content">
-        <button class="close" id="close-cart">✕</button>
-        <h2>Warenkorb</h2>
-        <div id="cart-items"></div>
-        <div class="cart-summary">
-            <div>Zwischensumme: <strong id="subtotal">0.00€</strong></div>
-            <button id="checkout-btn" class="primary">Zur Kasse</button>
+                <section class="products">
+                    <div id="products-grid" class="grid"></div>
+                </section>
+            </main>
         </div>
     </div>
-</div>
 
-<!-- Checkout Modal -->
-<div id="checkout-modal" class="modal hidden">
-    <div class="modal-content">
-        <button class="close" id="close-checkout">✕</button>
-        <h2>Bestellung abschließen</h2>
-        <form id="checkout-form">
-            <label>Name <input name="name" required /></label>
-            <label>Email <input name="email" type="email" required /></label>
-            <label>Adresse <input name="address" required /></label>
-            <button type="submit" class="primary">Bestellung absenden</button>
-        </form>
+    <!-- Warenkorb Modal -->
+    <div id="cart-modal" class="modal hidden">
+        <div class="modal-content">
+            <button class="close" id="close-cart">✕</button>
+            <h2>Warenkorb</h2>
+            <div id="cart-items"></div>
+            <div class="cart-summary">
+                <div>Zwischensumme: <strong id="subtotal">0.00€</strong></div>
+                <button id="checkout-btn" class="primary">Zur Kasse</button>
+            </div>
+        </div>
     </div>
-</div>
 
-<footer class="site-footer">
-    <p>© Mini Shop — Demo</p>
-</footer>
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="modal hidden">
+        <div class="modal-content">
+            <button class="close" id="close-checkout">✕</button>
+            <h2>Bestellung abschließen</h2>
+            <form id="checkout-form">
+                <label>Name <input name="name" required /></label>
+                <label>Email <input name="email" type="email" required /></label>
+                <label>Adresse <input name="address" required /></label>
+                <button type="submit" class="primary">Bestellung absenden</button>
+            </form>
+        </div>
+    </div>
 
-<script src="script.js"></script>
+    <footer class="site-footer">
+        <p>© Mini Shop — Demo</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
