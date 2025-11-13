@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mini Shop</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-shell">
+        <aside class="sidebar" aria-label="Hauptnavigation">
+            <!-- Toggle button keeps the sidebar accessible for mouse and keyboard users -->
+            <button class="sidebar__toggle" aria-expanded="true" aria-label="Sidebar einklappen">
+                <span class="sidebar__toggle-icon" aria-hidden="true"></span>
+            </button>
+            <!-- Compact brand mark stays visible in both states -->
+            <div class="sidebar__brand">
+                <span class="sidebar__brand-icon" aria-hidden="true">🛍️</span>
+                <span class="sidebar__brand-label">Mini Shop</span>
+            </div>
+            <!-- User profile block mirrors the Windows 11 glass cards -->
+            <div class="sidebar__profile">
+                <div class="sidebar__profile-avatar" aria-hidden="true">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cdefs%3E%3CradialGradient id='a' cx='50%25' cy='35%25' r='65%25'%3E%3Cstop offset='0%25' stop-color='%23ffffff'/%3E%3Cstop offset='65%25' stop-color='%2389b8ff'/%3E%3Cstop offset='100%25' stop-color='%230849b3'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='120' height='120' fill='url(%23a)' rx='60'/%3E%3Cpath fill='%23ffffff' fill-opacity='0.75' d='M60 64c-12.15 0-22-10.02-22-22.4C38 29.19 47.85 19 60 19s22 10.19 22 22.6C82 53.98 72.15 64 60 64Zm0 11c17.64 0 32 11.08 32 24.76V108H28v-8.24C28 86.08 42.36 75 60 75Z'/%3E%3C/svg%3E" alt="" />
+                </div>
+                <div class="sidebar__profile-text">
+                    <strong class="sidebar__profile-name">Alex Morgan</strong>
+                    <span class="sidebar__profile-role">Mein Konto</span>
+                </div>
+            </div>
+            <nav class="sidebar__nav" aria-label="Menü">
+                <a href="index.html" class="sidebar__link sidebar__link--active" aria-current="page">
+                    <span class="sidebar__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M12 3.172 3 10.5V21h6.5v-5.75h5V21H21V10.5l-9-7.328Z"/></svg>
+                    </span>
+                    <span class="sidebar__label">Home</span>
+                </a>
+                <a href="profile.html" class="sidebar__link">
+                    <span class="sidebar__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M12 12.9a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2.2c-3.36 0-10 1.68-10 5v1h20v-1c0-3.32-6.64-5-10-5Z"/></svg>
+                    </span>
+                    <span class="sidebar__label">Profile</span>
+                </a>
+                <a href="#" class="sidebar__link">
+                    <span class="sidebar__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M19 6h-3a3 3 0 1 0-6 0H7a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1ZM12 4a1 1 0 0 1 1 1h-2a1 1 0 0 1 1-1Zm6 15H6V8h12Zm-5-3h2v2h-2Zm-4 0h2v2H9Zm4-4h2v2h-2Zm-4 0h2v2H9Z"/></svg>
+                    </span>
+                    <span class="sidebar__label">My Orders</span>
+                </a>
+                <a href="#" class="sidebar__link">
+                    <span class="sidebar__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27A6.5 6.5 0 1 0 16 15.5l.27.28v.79L21 21.49 21.49 21Zm-6 0a4.5 4.5 0 1 1 4.5-4.5 4.5 4.5 0 0 1-4.5 4.5Z"/></svg>
+                    </span>
+                    <span class="sidebar__label">Search</span>
+                </a>
+            </nav>
+            <a href="#" class="sidebar__link sidebar__link--logout">
+                <span class="sidebar__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M11 3h2v8h-2zm8.7 7.3-2.59-2.58L16.3 9.83l1.59 1.58-1.59 1.59 0 0-1.41 1.41 2.41 2.59L21 12zM5 5h4V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h4v-2H5z"/></svg>
+                </span>
+                <span class="sidebar__label">Abmelden</span>
+            </a>
+        </aside>
+        <div class="main-area">
+            <header class="site-header">
+                <div class="search-cart">
+                    <input id="search" type="search" placeholder="Produkt suchen..." />
+                    <button id="cart-btn" class="cart-btn">Warenkorb (<span id="cart-count">0</span>)</button>
+                </div>
+            </header>
+            <main class="content">
+                <section class="filters">
+                    <h3>Filter</h3>
+                    <label>
+                        Kategorie
+                        <select id="category-filter">
+                            <option value="all">Alle</option>
+                        </select>
+                    </label>
+                    <label>
+                        Preis bis
+                        <input id="price-filter" type="range" min="0" max="200" value="200" />
+                        <span id="price-value">200€</span>
+                    </label>
+                    <button id="clear-filters">Zurücksetzen</button>
+                </section>
+                <section class="products">
+                    <div id="products-grid" class="grid"></div>
+                </section>
+            </main>
+        </div>
+    </div>
+    <!-- Warenkorb Modal -->
+    <div id="cart-modal" class="modal hidden">
+        <div class="modal-content">
+            <button class="close" id="close-cart">✕</button>
+            <h2>Warenkorb</h2>
+            <div id="cart-items"></div>
+            <div class="cart-summary">
+                <div>Zwischensumme: <strong id="subtotal">0.00€</strong></div>
+                <button id="checkout-btn" class="primary">Zur Kasse</button>
+            </div>
+        </div>
+    </div>
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="modal hidden">
+        <div class="modal-content">
+            <button class="close" id="close-checkout">✕</button>
+            <h2>Bestellung abschließen</h2>
+            <form id="checkout-form">
+                <label>Name <input name="name" required /></label>
+                <label>Email <input name="email" type="email" required /></label>
+                <label>Adresse <input name="address" required /></label>
+                <button type="submit" class="primary">Bestellung absenden</button>
+            </form>
+        </div>
+    </div>
+    <footer class="site-footer">
+        <p>© Mini Shop — Demo</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
