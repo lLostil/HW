@@ -1,13 +1,17 @@
 :root {
-    --sidebar-bg: rgba(15, 23, 42, 0.9);
-    --sidebar-border: rgba(148, 163, 184, 0.15);
-    --accent: #38bdf8;
-    --accent-muted: rgba(56, 189, 248, 0.2);
-    --surface: rgba(15, 23, 42, 0.65);
-    --surface-border: rgba(148, 163, 184, 0.2);
-    --text: #e2e8f0;
-    --text-muted: #94a3b8;
-    --shadow: 0 24px 48px rgba(15, 23, 42, 0.35);
+    --bg-top: #4723b4;
+    --bg-mid: #31107c;
+    --bg-bottom: #110125;
+    --sphere-1: rgba(255, 115, 210, 0.9);
+    --sphere-2: rgba(125, 92, 255, 0.85);
+    --glass-strong: rgba(255, 255, 255, 0.18);
+    --glass-soft: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.35);
+    --text: #f7f4ff;
+    --text-muted: rgba(247, 244, 255, 0.72);
+    --accent-start: #ff7cc4;
+    --accent-end: #7f74ff;
+    --shadow: 0 30px 60px rgba(17, 1, 37, 0.45);
 }
 
 * {
@@ -19,19 +23,36 @@ body {
     min-height: 100vh;
     font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
     color: var(--text);
-    background: radial-gradient(circle at top left, #1e293b, #0f172a 55%, #020617 100%);
+    background: radial-gradient(120% 120% at 10% 0%, var(--bg-top) 0%, var(--bg-mid) 45%, var(--bg-bottom) 100%);
     display: flex;
     align-items: stretch;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    width: clamp(280px, 40vw, 480px);
+    height: clamp(280px, 40vw, 480px);
+    border-radius: 50%;
+    filter: blur(0.5px);
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at 30% 30%, var(--sphere-1) 0%, rgba(255, 115, 210, 0.45) 55%, rgba(255, 115, 210, 0));
+    box-shadow: 0 0 120px rgba(255, 115, 210, 0.55);
 }
 
 body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    background: url("images/modern-bg.jpg") center / cover no-repeat fixed;
-    opacity: 0.15;
-    mix-blend-mode: screen;
+    top: -120px;
+    left: -140px;
+}
+
+body::after {
+    background: radial-gradient(circle at 65% 35%, var(--sphere-2) 0%, rgba(127, 116, 255, 0.5) 55%, rgba(127, 116, 255, 0));
+    bottom: -160px;
+    right: -100px;
 }
 
 .app-shell {
@@ -41,16 +62,20 @@ body::before {
     grid-template-columns: 280px 1fr;
     min-height: 100vh;
     width: 100%;
-    backdrop-filter: blur(20px);
+    padding: 2.5rem;
+    gap: 2.5rem;
 }
 
 .sidebar {
     padding: 2.5rem 2rem;
-    background: var(--sidebar-bg);
-    border-right: 1px solid var(--sidebar-border);
+    background: linear-gradient(155deg, var(--glass-strong), var(--glass-soft));
+    border: 1px solid var(--glass-border);
+    border-radius: 2rem;
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
+    backdrop-filter: blur(24px);
+    box-shadow: var(--shadow);
 }
 
 .sidebar__brand {
@@ -71,7 +96,7 @@ body::before {
     text-decoration: none;
     font-weight: 600;
     padding: 0.85rem 1rem;
-    border-radius: 0.75rem;
+    border-radius: 0.9rem;
     transition: all 0.2s ease;
     display: flex;
     align-items: center;
@@ -81,21 +106,20 @@ body::before {
 .sidebar__link:hover,
 .sidebar__link:focus {
     color: var(--text);
-    background: var(--accent-muted);
+    background: rgba(255, 255, 255, 0.12);
     outline: none;
 }
 
 .sidebar__link--active {
-    background: var(--accent);
-    color: #0f172a;
-    box-shadow: 0 12px 30px rgba(56, 189, 248, 0.35);
+    color: var(--text);
+    background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
+    box-shadow: 0 18px 45px rgba(127, 116, 255, 0.45);
 }
 
 .main-area {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    padding: 2.5rem;
     gap: 2.5rem;
 }
 
@@ -109,11 +133,12 @@ body::before {
     display: flex;
     gap: 1rem;
     align-items: center;
-    background: var(--surface);
-    border: 1px solid var(--surface-border);
-    border-radius: 1rem;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.04));
+    border: 1px solid var(--glass-border);
+    border-radius: 1.25rem;
     padding: 0.75rem 1rem;
     box-shadow: var(--shadow);
+    backdrop-filter: blur(24px);
 }
 
 #search {
@@ -125,12 +150,16 @@ body::before {
     min-width: 220px;
 }
 
+#search::placeholder {
+    color: rgba(247, 244, 255, 0.6);
+}
+
 .cart-btn {
-    background: var(--accent);
-    color: #0f172a;
+    background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
+    color: #140536;
     font-weight: 600;
     border: none;
-    border-radius: 0.75rem;
+    border-radius: 0.85rem;
     padding: 0.65rem 1.1rem;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -138,7 +167,7 @@ body::before {
 
 .cart-btn:hover {
     transform: translateY(-1px);
-    box-shadow: 0 10px 20px rgba(56, 189, 248, 0.35);
+    box-shadow: 0 15px 30px rgba(127, 116, 255, 0.45);
 }
 
 .content {
@@ -150,11 +179,12 @@ body::before {
 
 .filters,
 .products {
-    background: var(--surface);
-    border: 1px solid var(--surface-border);
+    background: linear-gradient(155deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.05));
+    border: 1px solid var(--glass-border);
     border-radius: 1.5rem;
     padding: 1.75rem;
     box-shadow: var(--shadow);
+    backdrop-filter: blur(28px);
 }
 
 .filters h3 {
@@ -177,6 +207,19 @@ body::before {
     width: 100%;
 }
 
+.filters select {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid var(--glass-border);
+    border-radius: 0.85rem;
+    color: var(--text);
+    padding: 0.55rem 0.75rem;
+    font: inherit;
+}
+
+.filters input[type="range"] {
+    accent-color: var(--accent-end);
+}
+
 #price-value {
     font-weight: 600;
     color: var(--text);
@@ -184,9 +227,9 @@ body::before {
 
 #clear-filters {
     background: transparent;
-    border: 1px solid var(--accent);
-    border-radius: 0.75rem;
-    color: var(--accent);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 0.85rem;
+    color: var(--text);
     padding: 0.5rem 1rem;
     font-weight: 600;
     cursor: pointer;
@@ -194,8 +237,7 @@ body::before {
 }
 
 #clear-filters:hover {
-    background: var(--accent);
-    color: #0f172a;
+    background: rgba(255, 255, 255, 0.15);
 }
 
 .grid {
@@ -205,24 +247,26 @@ body::before {
 }
 
 .product-card {
-    background: rgba(15, 23, 42, 0.75);
-    border-radius: 1rem;
+    background: linear-gradient(160deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.05));
+    border-radius: 1.1rem;
     padding: 1.25rem;
-    border: 1px solid rgba(148, 163, 184, 0.1);
+    border: 1px solid var(--glass-border);
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+    backdrop-filter: blur(26px);
 }
 
 .product-card button {
     align-self: flex-start;
-    background: var(--accent);
-    color: #0f172a;
+    background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
+    color: #140536;
     border: none;
-    border-radius: 0.65rem;
-    padding: 0.5rem 1rem;
+    border-radius: 0.75rem;
+    padding: 0.5rem 1.1rem;
     cursor: pointer;
     font-weight: 600;
+    box-shadow: 0 12px 24px rgba(127, 116, 255, 0.45);
 }
 
 .site-footer {
@@ -234,10 +278,11 @@ body::before {
 .modal {
     position: fixed;
     inset: 0;
-    background: rgba(2, 6, 23, 0.75);
+    background: rgba(9, 2, 25, 0.75);
     display: flex;
     align-items: center;
     justify-content: center;
+    backdrop-filter: blur(18px);
 }
 
 .modal.hidden {
@@ -245,13 +290,36 @@ body::before {
 }
 
 .modal-content {
-    background: #0f172a;
+    background: linear-gradient(165deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.04));
     padding: 2rem;
-    border-radius: 1.25rem;
+    border-radius: 1.35rem;
     width: min(420px, calc(100% - 3rem));
     box-shadow: var(--shadow);
     position: relative;
-    border: 1px solid var(--surface-border);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(26px);
+}
+
+.modal-content label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.modal-content input {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid var(--glass-border);
+    border-radius: 0.85rem;
+    padding: 0.6rem 0.75rem;
+    color: var(--text);
+    font: inherit;
+}
+
+.modal-content input::placeholder {
+    color: rgba(247, 244, 255, 0.6);
 }
 
 .close {
@@ -266,18 +334,20 @@ body::before {
 }
 
 .primary {
-    background: var(--accent);
-    color: #0f172a;
+    background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
+    color: #140536;
     border: none;
-    border-radius: 0.75rem;
-    padding: 0.75rem 1.1rem;
+    border-radius: 0.85rem;
+    padding: 0.75rem 1.2rem;
     cursor: pointer;
     font-weight: 600;
+    box-shadow: 0 18px 36px rgba(127, 116, 255, 0.45);
 }
 
 @media (max-width: 1024px) {
     .app-shell {
         grid-template-columns: 220px 1fr;
+        padding: 2rem;
     }
 
     .content {
@@ -288,13 +358,16 @@ body::before {
 @media (max-width: 768px) {
     .app-shell {
         grid-template-columns: 1fr;
+        padding: 1.5rem;
+        gap: 1.75rem;
     }
 
     .sidebar {
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        padding: 1.5rem;
+        padding: 1.25rem 1.5rem;
+        border-radius: 1.5rem;
     }
 
     .sidebar__nav {
@@ -305,10 +378,6 @@ body::before {
 
     .sidebar__link {
         padding: 0.65rem 0.95rem;
-    }
-
-    .main-area {
-        padding: 1.5rem;
     }
 
     .search-cart {
